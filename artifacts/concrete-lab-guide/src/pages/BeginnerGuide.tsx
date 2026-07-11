@@ -1,7 +1,38 @@
 import { beginnerGuide } from "@/data/content";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { GraduationCap, FlaskConical, Layers, Droplets, Ruler, ChefHat, Briefcase, AlertCircle } from "lucide-react";
+import {
+  GraduationCap, FlaskConical, Layers, Droplets, Ruler, ChefHat, Briefcase,
+  AlertCircle, Calculator, Zap, TrendingUp, Info
+} from "lucide-react";
+
+// ─── C-Class table data ──────────────────────────────────────────────
+const cClasses = [
+  { grade: "C16/20", cube: 20, color: "bg-blue-100 dark:bg-blue-950/40 border-blue-300 dark:border-blue-800", textColor: "text-blue-800 dark:text-blue-300", use: "أعمال بسيطة: أرصفة، صبّات غير إنشائية" },
+  { grade: "C20/25", cube: 25, color: "bg-cyan-100 dark:bg-cyan-950/40 border-cyan-300 dark:border-cyan-800", textColor: "text-cyan-800 dark:text-cyan-300", use: "أساسات المنازل الصغيرة" },
+  { grade: "C25/30", cube: 30, color: "bg-emerald-100 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800", textColor: "text-emerald-800 dark:text-emerald-300", use: "⭐ الأكثر شيوعاً في الأردن — أعمدة وجسور وأسقف المباني" },
+  { grade: "C30/37", cube: 37, color: "bg-amber-100 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800", textColor: "text-amber-800 dark:text-amber-300", use: "مشاريع كبيرة — جسور، أرضيات صناعية" },
+  { grade: "C35/45", cube: 45, color: "bg-orange-100 dark:bg-orange-950/40 border-orange-300 dark:border-orange-800", textColor: "text-orange-800 dark:text-orange-300", use: "منشآت خاصة — أبراج، مواقف طابقية" },
+  { grade: "C40/50", cube: 50, color: "bg-red-100 dark:bg-red-950/40 border-red-300 dark:border-red-800", textColor: "text-red-800 dark:text-red-300", use: "خرسانة عالية القوة — مشاريع خاصة جداً" },
+];
+
+// ─── Calculation step builder ────────────────────────────────────────
+function CalcStep({ num, label, formula, result }: { num: number; label: string; formula: string; result: string }) {
+  return (
+    <div className="flex gap-3 items-start">
+      <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+        {num}
+      </span>
+      <div className="flex-1">
+        <p className="text-sm font-semibold mb-1">{label}</p>
+        <div className="bg-slate-50 dark:bg-slate-900 rounded-lg px-3 py-2 font-mono text-sm text-primary border border-border">
+          {formula}
+        </div>
+        <p className="text-xs text-emerald-700 dark:text-emerald-400 mt-1 font-semibold">= {result}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function BeginnerGuide() {
   return (
@@ -13,7 +44,7 @@ export default function BeginnerGuide() {
           دليل المبتدئ — من الصفر للاحتراف
         </h1>
         <p className="text-muted-foreground leading-relaxed text-lg">
-          لو كنت جديداً في مجال مختبر الخرسانة الجاهزة، هذه الصفحة تُعلّمك كل الأساسيات التي تحتاجها قبل أن تدخل الموقع أول مرة.
+          لو كنت جديداً في مجال مختبر الخرسانة الجاهزة، هذه الصفحة تُعلّمك كل الأساسيات من البداية.
         </p>
       </div>
 
@@ -112,7 +143,7 @@ export default function BeginnerGuide() {
                 </p>
                 {item.types && (
                   <p className="text-sm leading-relaxed text-muted-foreground">
-                    <span className="font-semibold text-foreground">الأنواع: </span>
+                    <span className="font-semibold text-foreground">الأنواع / التفاصيل: </span>
                     {item.types}
                   </p>
                 )}
@@ -126,6 +157,76 @@ export default function BeginnerGuide() {
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* ─── SUPERPLASTICIZER DEEP DIVE ─── */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span className="w-1.5 h-7 bg-violet-500 rounded-full block shrink-0"></span>
+          <Zap className="w-6 h-6 text-violet-500" />
+          ما هو المميع (السوبر / Superplasticizer)؟
+        </h2>
+        <Card className="overflow-hidden">
+          <div className="bg-violet-50 dark:bg-violet-950/30 border-b border-violet-200 dark:border-violet-900 px-5 py-4">
+            <p className="font-bold text-violet-800 dark:text-violet-300 text-base">
+              بكلام بسيط: المميع يجعل الباطون طرياً بدون إضافة ماء — وهذا هو سر قوته.
+            </p>
+          </div>
+          <CardContent className="pt-5 space-y-5">
+            {/* How it works */}
+            <div>
+              <p className="font-semibold mb-3">كيف يعمل المميع؟</p>
+              <div className="grid md:grid-cols-3 gap-3">
+                {[
+                  { step: "قبل المميع", desc: "جزيئات الأسمنت تتكتل مع بعضها ويحتجز الماء بينها — الخرسانة تبدو جامدة", color: "bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-900 text-red-800 dark:text-red-300" },
+                  { step: "المميع يعمل", desc: "يُحيط المميع بجزيئات الأسمنت ويفصلها عن بعضها — يُحرر الماء المحبوس", color: "bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900 text-amber-800 dark:text-amber-300" },
+                  { step: "النتيجة", desc: "نفس كمية الماء + نفس الأسمنت = خرسانة أكثر طراوة وهطول أعلى بكثير", color: "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900 text-emerald-800 dark:text-emerald-300" },
+                ].map((item, i) => (
+                  <div key={i} className={`${item.color} border rounded-xl p-4`}>
+                    <p className="font-bold text-sm mb-2">{item.step}</p>
+                    <p className="text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Why not water */}
+            <div className="bg-slate-900 text-white rounded-xl p-5">
+              <p className="font-bold mb-3 text-amber-400 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4" />
+                لماذا السوبر أفضل من إضافة ماء؟
+              </p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-red-400 font-semibold text-sm mb-2">❌ إضافة ماء (خطأ):</p>
+                  <ul className="space-y-1.5 text-sm text-slate-300">
+                    <li>• ترفع نسبة w/c (ماء/أسمنت)</li>
+                    <li>• تُضعف قوة الانضغاط في 28 يوماً</li>
+                    <li>• تُخالف المواصفات وتصميم الخلطة</li>
+                    <li>• قد تُسبب نتائج كسر منخفضة</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-emerald-400 font-semibold text-sm mb-2">✅ إضافة سوبر (صح):</p>
+                  <ul className="space-y-1.5 text-sm text-slate-300">
+                    <li>• نسبة w/c تبقى ثابتة</li>
+                    <li>• القوة لا تتأثر</li>
+                    <li>• تُحقق الهطول المطلوب</li>
+                    <li>• مسموح بها بإذن المهندس وجرعة محددة</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Practical note */}
+            <div className="bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-900 p-4 rounded-xl flex items-start gap-3">
+              <Info className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0 mt-0.5" />
+              <div className="text-sm text-violet-800 dark:text-violet-300 leading-relaxed">
+                <strong>في الموقع:</strong> إذا قال مشرف المحطة "الخلطة جامدة — أضيف لها ماء"، الجواب الصحيح هو: "لا ماء بدون إذن المهندس. الحل الهندسي هو جرعة سوبر إضافية بموافقة المهندس وإعادة الخلط". دورك تُقنع بالرقم — قِس الهطول أولاً ثم تواصل مع المهندس.
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </section>
 
       {/* Slump Explained */}
@@ -169,7 +270,145 @@ export default function BeginnerGuide() {
         </Card>
       </section>
 
-      {/* Strength Explained */}
+      {/* ─── C-CLASSES SIMPLIFIED ─── */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span className="w-1.5 h-7 bg-emerald-500 rounded-full block shrink-0"></span>
+          <TrendingUp className="w-6 h-6 text-emerald-500" />
+          ما معنى C25/30 وC30/37 وبقية الرتب؟
+        </h2>
+        <Card>
+          <CardContent className="pt-6 space-y-5">
+            {/* Simple explanation */}
+            <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 rounded-xl p-4">
+              <p className="font-bold text-emerald-800 dark:text-emerald-300 text-base mb-2">
+                القاعدة البسيطة:
+              </p>
+              <p className="text-emerald-800 dark:text-emerald-300 text-sm leading-relaxed">
+                <strong>C</strong> = Compressive (قوة الانضغاط) |{" "}
+                <strong>الرقم الأول</strong> = قوة الأسطوانة بالميجاباسكال |{" "}
+                <strong>الرقم الثاني</strong> = قوة المكعب بالميجاباسكال.
+                <br />
+                في الأردن نستخدم <strong>مكعبات 150mm</strong> فالرقم الثاني هو المرجع لك.
+              </p>
+            </div>
+
+            {/* Grade table */}
+            <div className="space-y-2">
+              <p className="font-semibold text-sm mb-3">جدول الرتب الشائعة — ماذا يعني كل رتبة؟</p>
+              <div className="grid gap-2">
+                {cClasses.map((cls) => (
+                  <div key={cls.grade} className={`${cls.color} border rounded-xl p-3.5 flex items-center gap-3`}>
+                    <div className="text-center min-w-[70px]">
+                      <div className={`text-base font-bold ${cls.textColor}`}>{cls.grade}</div>
+                      <div className={`text-xs ${cls.textColor} opacity-80`}>مكعب: {cls.cube} MPa</div>
+                    </div>
+                    <div className={`text-sm ${cls.textColor} leading-relaxed border-r border-current/20 pr-3 mr-1`}>
+                      {cls.use}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* MPa meaning */}
+            <div className="bg-slate-50 dark:bg-slate-900 border border-border rounded-xl p-4">
+              <p className="font-semibold mb-3 text-sm">ما معنى الميجاباسكال (MPa)؟</p>
+              <div className="space-y-2 text-sm leading-relaxed">
+                <p>1 MPa = 1 نيوتن على كل مليمتر مربع = حوالي 100 غرام على كل مليمتر مربع.</p>
+                <p>مكعب C25/30: نريده أن يتحمل <strong>30 نيوتن على كل مم²</strong> قبل أن يُكسر.</p>
+                <p className="text-muted-foreground">مساحة المكعب 150mm = 22,500 مم² — فإجمالي القوة = 30 × 22,500 = <strong>675,000 نيوتن = 675 كيلو نيوتن</strong>.</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* ─── HOW TO READ A CRUSH RESULT ─── */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span className="w-1.5 h-7 bg-primary rounded-full block shrink-0"></span>
+          <Calculator className="w-6 h-6 text-primary" />
+          ماذا يعني "كسر 500" أو "كسر 675"؟ — كيف تقرأ نتيجة المكعب
+        </h2>
+        <Card>
+          <CardContent className="pt-6 space-y-5">
+            <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 rounded-xl p-4 text-sm text-amber-800 dark:text-amber-300 leading-relaxed">
+              <strong>لماذا الناس يقولون "كسر 500" أو "كسر 675"؟</strong><br/>
+              المكبس يُظهر قوة الكسر بالكيلو نيوتن (kN) — وهذه القوة الإجمالية على المكعب كاملاً. لكن الرتبة المطلوبة (مثل 30 MPa) تعني القوة على كل مليمتر مربع. لتحويل القراءة لـ MPa تحتاج خطوتين فقط.
+            </div>
+
+            {/* Step by step */}
+            <div className="space-y-4">
+              <p className="font-semibold text-sm">مثال: مكعب 150mm، كسر عند 585 kN، الرتبة C25/30</p>
+
+              <CalcStep
+                num={1}
+                label="احسب مساحة وجه المكعب (mm²)"
+                formula="150 mm × 150 mm = 22,500 mm²"
+                result="المساحة = 22,500 مم²"
+              />
+              <CalcStep
+                num={2}
+                label="حوّل قوة الكسر من kN إلى N"
+                formula="585 kN × 1,000 = 585,000 N"
+                result="القوة = 585,000 نيوتن"
+              />
+              <CalcStep
+                num={3}
+                label="احسب قوة الانضغاط (MPa)"
+                formula="585,000 ÷ 22,500 = 26 MPa"
+                result="26 ميجاباسكال"
+              />
+              <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-xl p-4">
+                <p className="font-bold text-red-800 dark:text-red-300 text-sm mb-1">الحكم:</p>
+                <p className="text-sm text-red-700 dark:text-red-400">
+                  26 MPa أقل من الحد المطلوب لـ C25/30 (30 MPa) — المكعب <strong>لم يُحقق الرتبة</strong>. أبلغ المهندس.
+                </p>
+              </div>
+            </div>
+
+            {/* Quick reference table */}
+            <div className="border border-border rounded-xl overflow-hidden">
+              <div className="bg-slate-900 text-white px-4 py-2 text-sm font-bold">
+                جدول سريع — قراءة المكبس مقابل الرتبة (مكعب 150mm)
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-slate-50 dark:bg-slate-900">
+                    <tr>
+                      <th className="text-right px-4 py-2 font-semibold text-slate-600 dark:text-slate-400">قراءة المكبس (kN)</th>
+                      <th className="text-right px-4 py-2 font-semibold text-slate-600 dark:text-slate-400">القوة (MPa)</th>
+                      <th className="text-right px-4 py-2 font-semibold text-slate-600 dark:text-slate-400">الحكم لـ C25/30</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { kn: "450", mpa: "20", verdict: "❌ فشل", cls: "text-red-600 dark:text-red-400" },
+                      { kn: "560", mpa: "24.9", verdict: "❌ فشل (أقل من 30)", cls: "text-red-600 dark:text-red-400" },
+                      { kn: "675", mpa: "30.0", verdict: "✓ مقبول (حد أدنى)", cls: "text-amber-600 dark:text-amber-400" },
+                      { kn: "750", mpa: "33.3", verdict: "✓ ✓ جيد", cls: "text-emerald-600 dark:text-emerald-400" },
+                      { kn: "900", mpa: "40.0", verdict: "✓ ✓ ممتاز", cls: "text-emerald-600 dark:text-emerald-400" },
+                    ].map((row, i) => (
+                      <tr key={i} className={i % 2 === 0 ? "bg-white dark:bg-slate-950" : "bg-slate-50/50 dark:bg-slate-900/50"}>
+                        <td className="px-4 py-2.5 font-mono font-bold">{row.kn}</td>
+                        <td className="px-4 py-2.5 font-mono text-primary font-bold">{row.mpa}</td>
+                        <td className={`px-4 py-2.5 font-semibold ${row.cls}`}>{row.verdict}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900 p-3 rounded-lg text-sm text-blue-800 dark:text-blue-300">
+              <strong>اختصار مفيد للمكعب 150mm:</strong> MPa = (kN × 1000) ÷ 22500. أو بشكل أسرع: اضرب kN في 0.0444.
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Strength / Timing */}
       <section>
         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
           <span className="w-1.5 h-7 bg-primary rounded-full block shrink-0"></span>
@@ -206,7 +445,95 @@ export default function BeginnerGuide() {
         </Card>
       </section>
 
-      {/* Mix Design Explained */}
+      {/* ─── STEP-BY-STEP CALCULATIONS ─── */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span className="w-1.5 h-7 bg-primary rounded-full block shrink-0"></span>
+          <Calculator className="w-6 h-6 text-primary" />
+          الحسابات خطوة بخطوة — أمثلة محسوبة كاملة
+        </h2>
+        <div className="space-y-4">
+
+          {/* Calc 1: Compressive strength */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base">📐 حساب قوة الانضغاط</CardTitle>
+              <p className="text-xs text-muted-foreground">مكعب 150mm، المكبس أظهر 720 kN</p>
+            </CardHeader>
+            <CardContent className="pt-5 space-y-4">
+              <CalcStep num={1} label="مساحة وجه المكعب" formula="150 × 150 = 22,500 mm²" result="22,500 مم²" />
+              <CalcStep num={2} label="القوة بالنيوتن" formula="720 kN × 1000 = 720,000 N" result="720,000 نيوتن" />
+              <CalcStep num={3} label="قوة الانضغاط" formula="720,000 ÷ 22,500 = 32 MPa" result="32 ميجاباسكال" />
+              <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 p-3 rounded-lg text-sm text-emerald-800 dark:text-emerald-300">
+                ✓ 32 MPa أعلى من 30 MPa المطلوبة لـ C25/30 — المكعب مقبول
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Calc 2: w/c ratio */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base">💧 حساب نسبة الماء/الأسمنت (w/c)</CardTitle>
+              <p className="text-xs text-muted-foreground">الخلطة: ماء 175 لتر، أسمنت 350 كيلو</p>
+            </CardHeader>
+            <CardContent className="pt-5 space-y-4">
+              <CalcStep num={1} label="نسبة w/c" formula="175 ÷ 350 = 0.50" result="نسبة 0.50" />
+              <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl text-sm space-y-2">
+                <p className="font-semibold">ماذا يعني 0.50؟</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  لكل كيلو أسمنت، هناك 500 غرام ماء (نصف الوزن). كلما قلّت النسبة (0.40) زادت القوة. كلما زادت النسبة (0.60) قلّت القوة. الحد المعتاد للبناء الإنشائي: 0.40 – 0.55.
+                </p>
+                <div className="grid grid-cols-3 gap-2 mt-3">
+                  {[
+                    { wc: "< 0.40", note: "عالية القوة جداً — صعبة الصب", color: "text-amber-600 dark:text-amber-400" },
+                    { wc: "0.45-0.55", note: "النطاق الطبيعي — متوازن", color: "text-emerald-600 dark:text-emerald-400" },
+                    { wc: "> 0.60", note: "قوة منخفضة — خطر", color: "text-red-600 dark:text-red-400" },
+                  ].map((item, i) => (
+                    <div key={i} className="text-center">
+                      <div className={`font-bold text-sm ${item.color}`}>{item.wc}</div>
+                      <div className="text-xs text-muted-foreground mt-0.5">{item.note}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Calc 3: Filler */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base">🧪 حساب نسبة الفيلر (الغبار) في الركام</CardTitle>
+              <p className="text-xs text-muted-foreground">وزن قبل الغسيل 2000g، بعد الغسيل والتجفيف 1950g</p>
+            </CardHeader>
+            <CardContent className="pt-5 space-y-4">
+              <CalcStep num={1} label="الفرق في الوزن (الغبار المغسول)" formula="2000 – 1950 = 50 g" result="50 غرام فيلر" />
+              <CalcStep num={2} label="نسبة الفيلر بالمئة" formula="(50 ÷ 2000) × 100 = 2.5%" result="2.5% فيلر" />
+              <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 p-3 rounded-lg text-sm text-amber-800 dark:text-amber-300">
+                للفولي والعدسي: الحد المسموح ≤ 1.5%. نتيجة 2.5% تتجاوز الحد — يجب إبلاغ المهندس وربما رفض هذه الدفعة.
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Calc 4: Density */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base">⚖️ حساب كثافة الخرسانة الطرية</CardTitle>
+              <p className="text-xs text-muted-foreground">وعاء فارغ 5.2 kg، ممتلئ 17.6 kg، الحجم 5 لتر</p>
+            </CardHeader>
+            <CardContent className="pt-5 space-y-4">
+              <CalcStep num={1} label="وزن الخرسانة فقط" formula="17.6 – 5.2 = 12.4 kg" result="12.4 كيلوغرام" />
+              <CalcStep num={2} label="تحويل الحجم لمتر مكعب" formula="5 لتر = 0.005 m³" result="0.005 متر مكعب" />
+              <CalcStep num={3} label="الكثافة" formula="12.4 ÷ 0.005 = 2480 kg/m³" result="2480 كغ/م³" />
+              <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900 p-3 rounded-lg text-sm text-blue-800 dark:text-blue-300">
+                الكثافة الطبيعية: 2300 – 2450 kg/m³. 2480 أعلى قليلاً من المعتاد — قد يعني ركام ثقيل أو محتوى هواء منخفض.
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
+      </section>
+
+      {/* Mix Design */}
       <section>
         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
           <span className="w-1.5 h-7 bg-primary rounded-full block shrink-0"></span>
@@ -229,7 +556,6 @@ export default function BeginnerGuide() {
               </div>
             </div>
 
-            {/* Example mix table */}
             <div className="border border-border rounded-lg overflow-hidden mt-4">
               <div className="bg-slate-900 text-white px-4 py-2 text-sm font-bold">
                 مثال: تصميم خلطة C25/30 (لكل 1 متر مكعب)
@@ -239,19 +565,19 @@ export default function BeginnerGuide() {
                   <thead className="bg-slate-50 dark:bg-slate-900">
                     <tr>
                       <th className="text-right px-4 py-2 font-semibold text-slate-600 dark:text-slate-400">المادة</th>
-                      <th className="text-right px-4 py-2 font-semibold text-slate-600 dark:text-slate-400">الكمية التقريبية</th>
+                      <th className="text-right px-4 py-2 font-semibold text-slate-600 dark:text-slate-400">الكمية</th>
                       <th className="text-right px-4 py-2 font-semibold text-slate-600 dark:text-slate-400">ملاحظة</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      { mat: "أسمنت", qty: "350 kg", note: "يتراوح 300-400 kg حسب الرتبة" },
-                      { mat: "ماء", qty: "175 L", note: "w/c = 0.50" },
+                      { mat: "أسمنت", qty: "350 kg", note: "300-400 kg حسب الرتبة" },
+                      { mat: "ماء", qty: "175 L", note: "w/c = 175÷350 = 0.50" },
                       { mat: "فوليّة (10-20mm)", qty: "600 kg", note: "الهيكل الرئيسي" },
                       { mat: "عدسية (5-10mm)", qty: "300 kg", note: "يملأ فراغات الفولي" },
                       { mat: "سمسمية (2.36-5mm)", qty: "150 kg", note: "اختياري حسب التصميم" },
                       { mat: "رمل", qty: "750 kg", note: "الركام الناعم" },
-                      { mat: "مضاف (سوبر)", qty: "3.5 L", note: "حوالي 1% من وزن الأسمنت" },
+                      { mat: "مضاف (سوبر / مميع)", qty: "3.5 – 7 L", note: "~1-2% من وزن الأسمنت" },
                     ].map((row, i) => (
                       <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-slate-950' : 'bg-slate-50/50 dark:bg-slate-900/50'}>
                         <td className="px-4 py-2.5 font-medium">{row.mat}</td>
@@ -282,24 +608,24 @@ export default function BeginnerGuide() {
                   a: "في الأردن وعموم الشام، 'الباطون' هو الاسم العامي للخرسانة (Concrete). هي نفس المادة — الباطون الجاهز هو Ready-Mix Concrete وهو الباطون الذي يُصنع في مصنع متخصص ويُوزَّع بميكسرات للمواقع."
                 },
                 {
-                  q: "ما الفرق بين الرتبة C25/30 وC30/37؟",
-                  a: "الرقمان يمثلان قوة الانضغاط بالميجاباسكال (MPa) عند 28 يوماً: الرقم الأول قوة الأسطوانة (Cylinder) والثاني قوة المكعب (Cube). C25/30 أقل قوةً من C30/37. في الأردن: C25/30 للأعمال العادية، C30/37 وأعلى للمشاريع الكبيرة والجسور."
+                  q: "ما الفرق بين C25/30 وC30/37؟",
+                  a: "الرقمان يمثلان قوة الانضغاط بالميجاباسكال (MPa) عند 28 يوماً: الرقم الأول قوة الأسطوانة والثاني قوة المكعب. C25/30 أقل قوةً من C30/37. في الأردن: C25/30 للأعمال العادية، C30/37 وأعلى للمشاريع الكبيرة والجسور."
                 },
                 {
                   q: "لماذا نستخدم مكعبات 150mm وليس 100mm؟",
-                  a: "المكعب 150mm هو الحجم القياسي حسب BS EN ويُعطي نتيجة أكثر دقة لأنه يستوعب حجارة فولي أكبر حجماً. المكعب 100mm يُستخدم أحياناً للمقارنة لكن نتيجته ترتفع بنسبة حوالي 5-10% عن 150mm. حسب معظم المواصفات: المكعب المرجعي هو 150mm."
+                  a: "المكعب 150mm هو الحجم القياسي حسب BS EN ويُعطي نتيجة أدق لأنه يستوعب حجارة فولي أكبر. المكعب 100mm يُستخدم أحياناً لكن نتيجته أعلى بـ 5-10% من 150mm. في حال استخدام 100mm: MPa = (kN × 1000) ÷ 10,000."
                 },
                 {
                   q: "لماذا نعالج المكعبات بالماء وليس بالهواء؟",
-                  a: "الأسمنت يتصلب عن طريق تفاعل كيميائي مع الماء (يُسمى الإماهة / Hydration). هذا التفاعل يحتاج رطوبة مستمرة لأسابيع. إذا جفّت الخرسانة مبكراً، يتوقف التفاعل ويبقى الأسمنت غير متفاعل بالكامل وتنتهي القوة أقل بكثير. المعالجة المائية تضمن استمرار التفاعل وتطور القوة الكاملة."
+                  a: "الأسمنت يتصلب عبر تفاعل كيميائي مع الماء (الإماهة). هذا التفاعل يحتاج رطوبة مستمرة. إذا جفّت الخرسانة مبكراً، يتوقف التفاعل وتبقى القوة أقل. المعالجة المائية تضمن استمرار التفاعل وتطور القوة الكاملة حتى 28 يوماً وما بعدها."
                 },
                 {
                   q: "ماذا يعني MPa وكيف أفهم الرقم؟",
-                  a: "MPa هي ميجاباسكال — وحدة قياس الضغط. 1 MPa = 1 N/mm² = حوالي 10 كغ على كل مليمتر مربع. مكعب C25/30 يعني: عند الانهيار تحمّل ضغطاً يعادل 30 نيوتن (حوالي 3 كغ) على كل ميليمتر مربع من سطحه. مكعب 150mm مساحة سطحه 22,500mm² — فيتحمل قوة إجمالية تقارب 675,000 نيوتن = 675 كيلونيوتن."
+                  a: "MPa = ميجاباسكال = N/mm². 30 MPa تعني 30 نيوتن على كل مليمتر مربع. مكعب 150mm (مساحة 22,500 mm²) عند 30 MPa يتحمل: 30 × 22,500 = 675,000 نيوتن = 675 kN إجمالي قبل الكسر."
                 },
                 {
-                  q: "لماذا قد تختلف نتائج المكعبات بين اليوم 7 واليوم 28؟",
-                  a: "الأسمنت يُطوّر قوته تدريجياً مع الوقت. عند 7 أيام عادةً تكون القوة 60-70% من قوة 28 يوماً. النسبة تختلف حسب نوع الأسمنت والإضافات. المكعب ذو النتيجة المنخفضة عند 7 أيام قد يُعطي نتيجة مقبولة عند 28 يوماً — لذلك لا يُحكم بناءً على نتيجة 7 أيام وحدها."
+                  q: "مشرف الموقع قال 'الخلطة جامدة — أضيف لها ماء'. ماذا أرد؟",
+                  a: "قُل له: 'بقيس الهطول أولاً وأشوف الرقم الفعلي. إضافة ماء بدون حساب تُضعف الخرسانة وتُخالف المواصفات. إذا الهطول أقل من المطلوب، أتواصل مع المهندس — الحل الصحيح سوبر إضافي وليس ماء.' ثم نفّذ ما قلت."
                 }
               ].map((item, i) => (
                 <AccordionItem key={i} value={`faq-${i}`}>

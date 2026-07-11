@@ -10,6 +10,7 @@ import {
   ShieldAlert,
   GraduationCap,
   HelpCircle,
+  Trophy,
   Menu
 } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
@@ -21,6 +22,7 @@ const navItems = [
   { href: "/", label: "الرئيسية", icon: Home },
   { href: "/beginner", label: "دليل المبتدئ", icon: GraduationCap },
   { href: "/scenarios", label: "ماذا تفعل لو...؟", icon: HelpCircle },
+  { href: "/quiz", label: "اختبر نفسك", icon: Trophy },
   { href: "/tests", label: "دليل الاختبارات", icon: TestTube },
   { href: "/calculations", label: "الحسابات والأدوات", icon: Calculator },
   { href: "/classes", label: "الرتب والقوام", icon: Settings2 },

@@ -16,6 +16,7 @@ import Troubleshooting from './pages/Troubleshooting';
 import Safety from './pages/Safety';
 import BeginnerGuide from './pages/BeginnerGuide';
 import SiteScenarios from './pages/SiteScenarios';
+import Quiz from './pages/Quiz';
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/beginner" component={BeginnerGuide} />
         <Route path="/scenarios" component={SiteScenarios} />
+        <Route path="/quiz" component={Quiz} />
         <Route path="/standards" component={Standards} />
         <Route path="/tests" component={TestsGuide} />
         <Route path="/calculations" component={Calculations} />
