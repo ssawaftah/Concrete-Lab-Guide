@@ -14,6 +14,8 @@ import Equipment from './pages/Equipment';
 import Dictionary from './pages/Dictionary';
 import Troubleshooting from './pages/Troubleshooting';
 import Safety from './pages/Safety';
+import BeginnerGuide from './pages/BeginnerGuide';
+import SiteScenarios from './pages/SiteScenarios';
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,8 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/beginner" component={BeginnerGuide} />
+        <Route path="/scenarios" component={SiteScenarios} />
         <Route path="/standards" component={Standards} />
         <Route path="/tests" component={TestsGuide} />
         <Route path="/calculations" component={Calculations} />

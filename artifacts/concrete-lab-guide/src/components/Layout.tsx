@@ -8,24 +8,26 @@ import {
   Languages, 
   AlertTriangle, 
   ShieldAlert,
-  Search,
+  GraduationCap,
+  HelpCircle,
   Menu
 } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from './ui/sheet';
-import { Input } from './ui/input';
 
 const navItems = [
   { href: "/", label: "الرئيسية", icon: Home },
-  { href: "/standards", label: "المعايير (BS EN)", icon: BookOpen },
+  { href: "/beginner", label: "دليل المبتدئ", icon: GraduationCap },
+  { href: "/scenarios", label: "ماذا تفعل لو...؟", icon: HelpCircle },
   { href: "/tests", label: "دليل الاختبارات", icon: TestTube },
-  { href: "/calculations", label: "الحسابات والصيغ", icon: Calculator },
+  { href: "/calculations", label: "الحسابات والأدوات", icon: Calculator },
   { href: "/classes", label: "الرتب والقوام", icon: Settings2 },
+  { href: "/troubleshooting", label: "مشاكل الموقع", icon: AlertTriangle },
+  { href: "/standards", label: "المعايير (BS EN)", icon: BookOpen },
   { href: "/equipment", label: "المعدات", icon: Wrench },
   { href: "/dictionary", label: "القاموس", icon: Languages },
-  { href: "/troubleshooting", label: "العيوب والأخطاء", icon: AlertTriangle },
   { href: "/safety", label: "السلامة المهنية", icon: ShieldAlert },
 ];
 
