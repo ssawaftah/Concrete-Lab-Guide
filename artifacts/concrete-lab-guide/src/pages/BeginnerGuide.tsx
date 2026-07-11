@@ -3,7 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {
   GraduationCap, FlaskConical, Layers, Droplets, Ruler, ChefHat, Briefcase,
-  AlertCircle, Calculator, Zap, TrendingUp, Info
+  AlertCircle, Calculator, Zap, TrendingUp, Info, Factory, ClipboardList,
+  Truck, TestTube, FileText, Wrench, Clock, CheckCircle2
 } from "lucide-react";
 
 // ─── C-Class table data ──────────────────────────────────────────────
@@ -591,6 +592,406 @@ export default function BeginnerGuide() {
             </div>
           </CardContent>
         </Card>
+      </section>
+
+      {/* ─── FACTORY DAILY OPERATIONS ─── */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+          <span className="w-1.5 h-7 bg-violet-500 rounded-full block shrink-0"></span>
+          <Factory className="w-6 h-6 text-violet-500" />
+          يوم العمل داخل المصنع — ماذا يفعل الفني فعلاً؟
+        </h2>
+        <div className="space-y-4">
+
+          {/* Morning routine */}
+          <Card className="border-violet-200 dark:border-violet-900">
+            <CardHeader className="pb-3 bg-violet-50 dark:bg-violet-950/30 border-b border-violet-200 dark:border-violet-900">
+              <CardTitle className="text-base flex items-center gap-2 text-violet-800 dark:text-violet-300">
+                <Clock className="w-5 h-5" />
+                🌅 أول ما تصل للمصنع — روتين الصباح
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4">
+              <div className="grid md:grid-cols-2 gap-3">
+                {[
+                  { num: "1", title: "فحص مكعبات الكسر المستحقة اليوم", desc: "شوف السجل — أي مكعبات تاريخها اليوم (7 أيام أو 28 يوماً)؟ أخرجها من حوض المعالجة، جففها، سجّل أرقامها، وضعها جاهزة للمكبس." },
+                  { num: "2", title: "افتح سجل الإنتاج", desc: "شوف الطلبيات المجدولة لهذا اليوم: كم شحنة؟ ما الرتبة المطلوبة (كسر 250/300/350)؟ ما درجة الهطول؟ هل هناك اشتراطات خاصة؟" },
+                  { num: "3", title: "تحقق من حوض المعالجة", desc: "درجة الحرارة: يجب أن تكون 20°C ± 2°C. الماء نظيف؟ المكعبات كلها مغمورة؟ أضف أو فرّغ ماءً إذا لزم." },
+                  { num: "4", title: "تأكد من أدوات الاختبار", desc: "مخروط الهطول: نظيف وسليم؟ الصفيحة: مستوية؟ القضيب: 600mm وطرفه مدوّر؟ الساعة تعمل؟ الميزان معايَر؟" },
+                ].map((item) => (
+                  <div key={item.num} className="flex gap-3 bg-slate-50 dark:bg-slate-900 rounded-xl p-3">
+                    <span className="w-7 h-7 rounded-full bg-violet-500 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                      {item.num}
+                    </span>
+                    <div>
+                      <p className="font-semibold text-sm">{item.title}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Material testing */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Truck className="w-5 h-5 text-primary" />
+                🚛 استلام المواد — كيف تفحص الركام القادم للمصنع؟
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4 space-y-4">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                كل شاحنة فولي أو رمل تصل للمصنع قد تُؤثر على جودة الإنتاج. دورك هو اختبار عينة منها قبل أن تُفرَّغ في المستودع.
+              </p>
+              <div className="grid md:grid-cols-3 gap-3 text-sm">
+                {[
+                  {
+                    icon: "👁️",
+                    title: "الفحص البصري أولاً",
+                    steps: ["اللون موحد؟ أم فيه طبقات مختلطة؟", "هل الحجم يبدو صحيحاً (فولي 20mm؟ عدسي 10mm؟)", "هل فيه طين زائد؟ أو مواد غريبة؟", "رائحة غريبة؟ قد تدل على تلوث"]
+                  },
+                  {
+                    icon: "⚖️",
+                    title: "فحص نسبة الفيلر (الغبار)",
+                    steps: ["خذ عينة 1-2 كيلو من الشاحنة", "اغسلها على منخل 0.063mm", "جففها في الفرن 24 ساعة", "احسب: (الفرق ÷ الوزن الأصلي) × 100", "فولي: < 1% مقبول | رمل: < 3% مقبول"]
+                  },
+                  {
+                    icon: "📏",
+                    title: "تحليل التدرج الحبيبي",
+                    steps: ["خذ عينة ممثلة (2-3 كيلو)", "جففها ثم مررها على سلسلة مناخل", "قس الوزن المحتجز على كل منخل", "قارن النتائج بحدود التصميم", "هل المنحنى داخل الحدود المسموحة؟"]
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="bg-slate-50 dark:bg-slate-900 rounded-xl p-4 border border-border">
+                    <div className="text-2xl mb-2">{item.icon}</div>
+                    <p className="font-semibold text-sm mb-2">{item.title}</p>
+                    <ul className="space-y-1">
+                      {item.steps.map((s, i) => (
+                        <li key={i} className="text-xs text-muted-foreground flex gap-2">
+                          <span className="text-primary shrink-0">•</span>
+                          <span className="leading-relaxed">{s}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 rounded-xl p-4 text-sm">
+                <p className="font-bold text-amber-800 dark:text-amber-300 mb-2">⚠️ ماذا تفعل لو المواد فشلت الفحص؟</p>
+                <div className="grid md:grid-cols-2 gap-3 text-amber-700 dark:text-amber-400 text-xs">
+                  <div>
+                    <p className="font-semibold mb-1">لو الغبار زائد (فيلر عالٍ):</p>
+                    <p>لا تفرّغ الشاحنة. أبلغ مشرفك فوراً. الموردّ قد يُعيدها أو يخصم كمية. وثّق كل شيء.</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-1">لو التدرج خارج الحدود:</p>
+                    <p>قدّم التقرير للمهندس — قد يقرر قبولها مع تعديل تصميم الخلطة أو رفضها بالكامل.</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Sampling during production */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base flex items-center gap-2">
+                <TestTube className="w-5 h-5 text-primary" />
+                🔬 أخذ العينات من الإنتاج — الإجراء الصحيح
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4 space-y-4">
+              <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm">
+                <p className="font-bold mb-1">كم شحنة تأخذ عينة؟</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  حسب BS EN 206: عينة واحدة لكل 150 م³ أو لكل 5 شحنات من نفس الرتبة — أيهما أقل. في المشاريع الكبيرة أو المتطلبة: واحدة لكل 50 م³. دائماً ارجع لتصميم الخلطة والعقد لمعرفة التكرار المطلوب.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p className="font-semibold text-sm mb-3">ماذا تفعل عند أخذ العينة؟</p>
+                  <div className="space-y-2">
+                    {[
+                      "سجّل رقم الشحنة (Load No.) قبل أي شيء",
+                      "انتظر حتى يبدأ تفريغ الخلاطة — لا تأخذ من أول الخروج",
+                      "اجمع من 3 نقاط مختلفة أثناء التفريغ",
+                      "اخلط العينة بالمجرفة على صفيحة نظيفة",
+                      "ابدأ الهطول خلال 5 دقائق وأنهِ كل شيء في 15",
+                      "صُبّ المكعبات مباشرة بعد الهطول",
+                    ].map((s, i) => (
+                      <div key={i} className="flex gap-2 text-xs">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground leading-relaxed">{s}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-semibold text-sm mb-3">صبّ المكعبات — الخطوات</p>
+                  <div className="space-y-2">
+                    {[
+                      "دهن القالب بطبقة خفيفة من الزيت المعدني",
+                      "صُبّ الخرسانة على طبقتين متساويتين",
+                      "دمك كل طبقة 25 ضربة بالقضيب",
+                      "يمكن استخدام هزازة خارجية (External vibrator)",
+                      "سوّ السطح العلوي بالمجرفة أو شريط معدني",
+                      "غطّ القوالب ببلاستيك لمدة 24 ساعة",
+                      "ضع تاريخ الصبّ ورقم الشحنة على القالب",
+                    ].map((s, i) => (
+                      <div key={i} className="flex gap-2 text-xs">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground leading-relaxed">{s}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="border border-border rounded-xl overflow-hidden">
+                <div className="bg-slate-900 text-white px-4 py-2 text-sm font-bold">ما الذي يجب تسجيله مع كل عينة؟</div>
+                <div className="grid md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-border">
+                  <div className="p-4">
+                    <p className="font-semibold text-xs mb-2 text-muted-foreground">بيانات الشحنة</p>
+                    <ul className="space-y-1 text-xs text-muted-foreground">
+                      <li>• رقم الشحنة (Load No.)</li>
+                      <li>• رقم الميكسر أو الخلاطة</li>
+                      <li>• تاريخ ووقت الخلط والتفريغ</li>
+                      <li>• عدد اللفات (Revolutions)</li>
+                      <li>• اسم المشروع / الموقع</li>
+                      <li>• رقم العقد / تذكرة التسليم</li>
+                    </ul>
+                  </div>
+                  <div className="p-4">
+                    <p className="font-semibold text-xs mb-2 text-muted-foreground">نتائج الاختبارات</p>
+                    <ul className="space-y-1 text-xs text-muted-foreground">
+                      <li>• الرتبة المطلوبة (كسر 300 / C25/30)</li>
+                      <li>• قيمة الهطول المقاسة (mm)</li>
+                      <li>• الهطول المستهدف من التذكرة</li>
+                      <li>• كثافة الخرسانة الطرية (kg/m³)</li>
+                      <li>• أرقام المكعبات وتواريخ الكسر</li>
+                      <li>• الحرارة (الجو والخرسانة إن طُلب)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Cube curing and crushing */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Wrench className="w-5 h-5 text-primary" />
+                🧊 معالجة المكعبات وإجراء الكسر — دليل خطوة بخطوة
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4 space-y-4">
+              <div className="grid md:grid-cols-3 gap-3 text-sm">
+                <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
+                  <p className="font-bold text-blue-800 dark:text-blue-300 mb-3">مرحلة 1: 0–24 ساعة</p>
+                  <ul className="space-y-1.5 text-xs text-blue-700 dark:text-blue-400">
+                    <li>• المكعب في القالب، مُغطى بالبلاستيك</li>
+                    <li>• لا تحرّكه أو تهزّه</li>
+                    <li>• بعيد عن الشمس المباشرة والهواء</li>
+                    <li>• درجة الحرارة: 20°C مُفضّل</li>
+                  </ul>
+                </div>
+                <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4">
+                  <p className="font-bold text-emerald-800 dark:text-emerald-300 mb-3">مرحلة 2: 24 ساعة → 28 يوم</p>
+                  <ul className="space-y-1.5 text-xs text-emerald-700 dark:text-emerald-400">
+                    <li>• فكّ القالب بعد 24 ساعة بحذر</li>
+                    <li>• ضع المكعب في حوض ماء 20°C ± 2°C</li>
+                    <li>• الماء يجب أن يُغطي المكعب كاملاً</li>
+                    <li>• غيّر الماء كلما كان عكراً</li>
+                    <li>• لا تعرّضه للهواء الجاف أو الشمس</li>
+                  </ul>
+                </div>
+                <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
+                  <p className="font-bold text-amber-800 dark:text-amber-300 mb-3">مرحلة 3: يوم الكسر</p>
+                  <ul className="space-y-1.5 text-xs text-amber-700 dark:text-amber-400">
+                    <li>• أخرج المكعب من الحوض</li>
+                    <li>• جففه بقطعة قماش نظيفة</li>
+                    <li>• قِس الأبعاد: 150mm × 150mm × 150mm</li>
+                    <li>• تحقق أن الوجوه مستوية (لا كسر أو تشقق)</li>
+                    <li>• ضعه في المكبس مُمحوراً بدقة</li>
+                    <li>• سجّل القراءة بالكيلو نيوتن (kN)</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* CTM procedure */}
+              <div className="border border-border rounded-xl overflow-hidden">
+                <div className="bg-slate-900 text-white px-4 py-2.5 text-sm font-bold flex items-center gap-2">
+                  ⚙️ تشغيل المكبس (CTM) — الإجراء الصحيح
+                </div>
+                <div className="p-4 space-y-3">
+                  <div className="grid md:grid-cols-2 gap-3">
+                    {[
+                      { num: "1", title: "تحضير المكبس", desc: "تأكد أن المكبس معايَر وضمن صلاحية المعايرة (عادةً سنوية). نظّف السطحين العلوي والسفلي. تحقق أن القراءة تبدأ من الصفر." },
+                      { num: "2", title: "وضع المكعب", desc: "ضع المكعب في منتصف القاعدة السفلية بحيث تكون أوجهه متعامدة مع اتجاه الحمل — الوجوه الجانبية (وليس الوجه الذي صُبَّ أو نزع القالب منه) هي التي تتلقى الضغط." },
+                      { num: "3", title: "معدل التحميل", desc: "حمّل بمعدل 0.6 ± 0.2 ميجاباسكال في الثانية (≈ 13.5 kN/s للمكعب 150mm). حمّل بشكل مستمر بدون توقف حتى الكسر." },
+                      { num: "4", title: "تسجيل النتيجة", desc: "سجّل أقصى قوة قبل الانهيار بالكيلو نيوتن (kN). لاحظ شكل الكسر — هل هو كسر نظيف هرمي (مقبول) أم كسر جانبي (يستوجب ملاحظة)." },
+                    ].map((item) => (
+                      <div key={item.num} className="flex gap-3">
+                        <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                          {item.num}
+                        </span>
+                        <div>
+                          <p className="font-semibold text-sm">{item.title}</p>
+                          <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{item.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-4 border border-border">
+                    <p className="font-semibold text-sm mb-3">🔍 أشكال الكسر — ماذا تعني؟</p>
+                    <div className="grid md:grid-cols-3 gap-3 text-xs">
+                      {[
+                        { shape: "الهرمي المزدوج (X)", verdict: "✅ مثالي", desc: "تشققان هرميان متناظران من كل وجه — الكسر الطبيعي الصحيح." },
+                        { shape: "هرمي من وجه واحد", verdict: "✅ مقبول", desc: "هرم من طرف وتشققات جانبية من الطرف الآخر — طبيعي ومقبول." },
+                        { shape: "شقوق جانبية أو عمودية", verdict: "⚠️ سجّل ملاحظة", desc: "قد يعني سطح غير مستوٍ أو وضع غير محاور — ضع ملاحظة في السجل واعرض على المهندس." },
+                      ].map((f) => (
+                        <div key={f.shape} className="bg-white dark:bg-slate-950 border border-border rounded-lg p-3">
+                          <p className="font-bold">{f.verdict}</p>
+                          <p className="text-muted-foreground font-semibold mt-0.5">{f.shape}</p>
+                          <p className="text-muted-foreground mt-1 leading-relaxed">{f.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Documentation */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base flex items-center gap-2">
+                <FileText className="w-5 h-5 text-primary" />
+                📋 التوثيق — أهم مهارة للفني
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4 space-y-4">
+              <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm">
+                <p className="font-bold mb-1">لماذا التوثيق بهذه الأهمية؟</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  تقارير المختبر هي المستند القانوني الوحيد الذي يثبت جودة الخرسانة. في حالات النزاع أو الحوادث — القاضي والمهندس الاستشاري يطلبون سجلات المختبر. إذا لم توثّق، لا يوجد دليل أنك أجريت أي اختبار أصلاً.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="font-semibold mb-3">السجلات التي يجب أن تملأها يومياً</p>
+                  <div className="space-y-2">
+                    {[
+                      { icon: "📄", name: "سجل الإنتاج اليومي", desc: "عدد الشحنات، الرتب، الأوزان" },
+                      { icon: "📄", name: "سجل الهطول", desc: "رقم الشحنة، القراءة، الهدف، الحكم" },
+                      { icon: "📄", name: "سجل المكعبات", desc: "رقم، تاريخ صبّ، تاريخ كسر، النتيجة" },
+                      { icon: "📄", name: "سجل استلام المواد", desc: "الناقل، الوزن، نتائج الفحص" },
+                      { icon: "📄", name: "سجل المعالجة (الحوض)", desc: "درجة الحرارة اليومية" },
+                    ].map((item) => (
+                      <div key={item.name} className="flex gap-2 items-start bg-slate-50 dark:bg-slate-900 rounded-lg p-2.5">
+                        <span className="text-base shrink-0">{item.icon}</span>
+                        <div>
+                          <p className="text-xs font-semibold">{item.name}</p>
+                          <p className="text-xs text-muted-foreground">{item.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-semibold mb-3">قواعد التوثيق الصحيح</p>
+                  <div className="space-y-2 text-xs text-muted-foreground">
+                    {[
+                      "اكتب بالقلم — لا يُمحى. إذا أخطأت: اشطب بخط واحد واكتب فوقه ووقّع.",
+                      "لا تترك حقلاً فارغاً — اكتب N/A إذا لم يُقَس.",
+                      "سجّل التوقيت الفعلي — وقت أخذ العينة، وقت الهطول، وقت الصبّ.",
+                      "إذا كان هناك ملاحظة غير اعتيادية — اكتبها حتى لو تافهة تبدو.",
+                      "احتفظ بنسخة ورقية في المختبر وأرسل نسخة إلكترونية للمهندس.",
+                      "أرقام المكعبات: نظام ثابت مثل: YYYY-MM-رقم شحنة-رقم مكعب",
+                    ].map((rule, i) => (
+                      <div key={i} className="flex gap-2 items-start">
+                        <span className="w-4 h-4 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center shrink-0 mt-0.5 font-bold">{i + 1}</span>
+                        <span className="leading-relaxed">{rule}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Common factory problems */}
+          <Card>
+            <CardHeader className="pb-3 bg-slate-50 dark:bg-slate-900 border-b border-border">
+              <CardTitle className="text-base flex items-center gap-2">
+                <AlertCircle className="w-5 h-5 text-amber-500" />
+                ⚠️ مشكلات شائعة في المصنع — وكيف تتعامل معها
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4">
+              <div className="space-y-3">
+                {[
+                  {
+                    problem: "الميكسر لا يُكمل عدد اللفات المطلوبة",
+                    risk: "خرسانة غير متجانسة — الأسمنت والركام لم يختلطا بشكل كافٍ",
+                    action: "أبلغ المشغّل وأوقف الشحنة. الحد الأدنى: 70 لفة بعد إضافة آخر مادة. وثّق.",
+                    severity: "red"
+                  },
+                  {
+                    problem: "الميزان يُظهر وزناً مختلفاً عن التصميم (فرق > 2%)",
+                    risk: "تصميم الخلطة مُختل — قوة الخرسانة مختلفة عن المطلوبة",
+                    action: "أوقف الإنتاج. أبلغ المهندس. اطلب معايرة الميزان قبل الاستمرار.",
+                    severity: "red"
+                  },
+                  {
+                    problem: "مشغّل المحطة يريد إضافة ماء للميكسر",
+                    risk: "تقليل نسبة الماء/أسمنت يضعف الخرسانة — وقد يرفض الفني قبول المكعبات لاحقاً",
+                    action: "قِس الهطول أولاً. إذا كان في النطاق — لا حاجة للماء. إذا كان منخفضاً — الحل سوبر بأمر المهندس. وثّق أي إضافة ماء غير مصرح بها.",
+                    severity: "red"
+                  },
+                  {
+                    problem: "الخرسانة في الميكسر بدأ يتصلب قبل الوصول للموقع",
+                    risk: "انهيار الخلطة — لن تُملأ القوالب بشكل صحيح",
+                    action: "أبلغ الموقع والمصنع. لا تُضف ماءً. الميكسر يُعيد اللف. إذا تجاوز الوقت المسموح (90 دقيقة عادةً) — إعادة الشحنة للمصنع.",
+                    severity: "amber"
+                  },
+                  {
+                    problem: "درجة حرارة الخرسانة أعلى من 35°C (صيف الأردن)",
+                    risk: "تسريع الجمود — هطول ينخفض سريعاً ومشاكل في تطور القوة",
+                    action: "ثلّج ماء الخلط. استخدم ظل للمواد. اختبر بسرعة. وثّق درجة الحرارة مع كل شحنة حارة.",
+                    severity: "amber"
+                  },
+                  {
+                    problem: "مكعب تشقق أو كُسر قبل اختباره",
+                    risk: "فقدان عينة — لن تكون لديك نتيجة لهذه الشحنة",
+                    action: "وثّق أنه تشقق بسبب سقوط أو تعامل خاطئ. أبلغ المهندس. قد تحتاج أخذ عينة بديلة أو اعتماد نتائج أخرى.",
+                    severity: "blue"
+                  },
+                ].map((item, i) => (
+                  <div key={i} className={`border-r-4 ${item.severity === 'red' ? 'border-r-red-500 bg-red-50 dark:bg-red-950/20' : item.severity === 'amber' ? 'border-r-amber-500 bg-amber-50 dark:bg-amber-950/20' : 'border-r-blue-500 bg-blue-50 dark:bg-blue-950/20'} rounded-xl p-4`}>
+                    <div className="grid md:grid-cols-3 gap-3 text-sm">
+                      <div>
+                        <p className="font-bold text-xs text-muted-foreground mb-1">المشكلة</p>
+                        <p className="font-semibold leading-relaxed">{item.problem}</p>
+                      </div>
+                      <div>
+                        <p className="font-bold text-xs text-muted-foreground mb-1">الخطر</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{item.risk}</p>
+                      </div>
+                      <div>
+                        <p className="font-bold text-xs text-muted-foreground mb-1">الإجراء</p>
+                        <p className="text-sm leading-relaxed">{item.action}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
       </section>
 
       {/* FAQ Accordion */}
