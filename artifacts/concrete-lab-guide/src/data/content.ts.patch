@@ -1,0 +1,31 @@
+--- artifacts/concrete-lab-guide/src/data/content.ts
++++ artifacts/concrete-lab-guide/src/data/content.ts
+@@ -434,6 +434,12 @@
+   { ar: "الملدنات الفائقة", en: "Superplasticizers" },
+   { ar: "المؤخرات", en: "Retarders" },
+   { ar: "المسرعات", en: "Accelerators" },
+-  { ar: "التحليل بالمنخل / الغربلة", en: "Sieve Analysis" }
++  { ar: "التحليل بالمنخل / الغربلة", en: "Sieve Analysis" },
++  { ar: "فوليّة", en: "Fuliyyeh" },
++  { ar: "عدسية", en: "Adasiyyeh" },
++  { ar: "سمسمية", en: "Simsimiyyeh" },
++  { ar: "المكافئ الرملي", en: "Sand Equivalent" },
++  { ar: "الامتصاص", en: "Water Absorption" },
++  { ar: "الفيلر (الناعم)", en: "Filler (Fines)" }
+ ];
+ 
+@@ -540,3 +546,14 @@
+   "السلامة عند استخدام مكبس الضغط (منطقة حماية، عدم الاقتراب من العينة عند الانهيار).",
+   "السلامة في التعامل مع الأفران والهزازات الكهربائية."
+ ];
++
++export const jordanAggregates = {
++  title: "الركام المحلي في الأردن",
++  description: "التصنيف الشائع في المحاجر الأردنية:",
++  items: [
++    { name: "فوليّة (Fuliyyeh)", desc: "ركام خشن كبير الحجم تقريباً 10-20mm." },
++    { name: "عدسية (Adasiyyeh)", desc: "ركام متوسط الحجم تقريباً 5-10mm (شكل يشبه حبة العدس)." },
++    { name: "سمسمية (Simsimiyyeh)", desc: "ركام ناعم/خشن صغير تقريباً 2.36-5mm (يشبه حبة السمسم)." }
++  ],
++  note: "هذه أسماء محلية شائعة في الأردن وتُختبر بنفس معايير BS EN لكن كل صنف يُفحص منفصلاً لأن خواصه (الفيلر والامتصاص) تختلف."
++};

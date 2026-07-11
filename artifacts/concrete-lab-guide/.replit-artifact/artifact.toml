@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "دليل فني مختبر الخرسانة الجاهزة"
+version = "1.0.0"
+id = "artifacts/concrete-lab-guide"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20656
+
+[services.development]
+run = "pnpm --filter @workspace/concrete-lab-guide run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/concrete-lab-guide", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/concrete-lab-guide/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20656"
+BASE_PATH = "/"
